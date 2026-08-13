@@ -23,8 +23,8 @@ module KiprioHttpApisTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("KIPRIOHTTPAPIS_TEST_LIVE")
-    override = getenv("KIPRIOHTTPAPIS_TEST_OVERRIDE")
+    live = getenv("KIPRIO_HTTP_APIS_TEST_LIVE")
+    override = getenv("KIPRIO_HTTP_APIS_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module KiprioHttpApisTestRunner
       end
     end
 
-    explain = getenv("KIPRIOHTTPAPIS_TEST_EXPLAIN")
-    m["KIPRIOHTTPAPIS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("KIPRIO_HTTP_APIS_TEST_EXPLAIN")
+    m["KIPRIO_HTTP_APIS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

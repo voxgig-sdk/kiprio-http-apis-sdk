@@ -26,8 +26,8 @@ import {
 describe('GrammarEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when KIPRIOHTTPAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('KIPRIOHTTPAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when KIPRIO_HTTP_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('KIPRIO_HTTP_APIS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = KiprioHttpApisSDK.test()
@@ -62,7 +62,7 @@ describe('GrammarEntity', async () => {
     const grammar_ref01_ent = client.Grammar()
     let grammar_ref01_data = setup.data.new.grammar['grammar_ref01']
 
-    grammar_ref01_data = await grammar_ref01_ent.create(grammar_ref01_data)
+    grammar_ref01_data = (await grammar_ref01_ent.create(grammar_ref01_data)).data()
     assert(null != grammar_ref01_data)
 
 

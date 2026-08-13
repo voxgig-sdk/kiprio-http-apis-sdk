@@ -65,16 +65,16 @@ def generate_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "KIPRIOHTTPAPIS_TEST_GENERATE_ENTID" => {},
-    "KIPRIOHTTPAPIS_TEST_LIVE" => "FALSE",
-    "KIPRIOHTTPAPIS_APIKEY" => "NONE",
+    "KIPRIO_HTTP_APIS_TEST_GENERATE_ENTID" => {},
+    "KIPRIO_HTTP_APIS_TEST_LIVE" => "FALSE",
+    "KIPRIO_HTTP_APIS_APIKEY" => "NONE",
   })
 
-  live = env["KIPRIOHTTPAPIS_TEST_LIVE"] == "TRUE"
+  live = env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["KIPRIOHTTPAPIS_APIKEY"],
+      "apikey" => env["KIPRIO_HTTP_APIS_APIKEY"],
     }
     client = KiprioHttpApisSDK.new(merged_opts)
     return {

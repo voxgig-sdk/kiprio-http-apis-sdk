@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# KiprioHttpApis SDK exists test
 
 import pytest
 from kipriohttpapis_sdk import KiprioHttpApisSDK

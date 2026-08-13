@@ -43,8 +43,8 @@ class KiprioHttpApisTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('KIPRIOHTTPAPIS_TEST_LIVE');
-        $override = self::getenv('KIPRIOHTTPAPIS_TEST_OVERRIDE');
+        $live = self::getenv('KIPRIO_HTTP_APIS_TEST_LIVE');
+        $override = self::getenv('KIPRIO_HTTP_APIS_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class KiprioHttpApisTestRunner
             }
         }
 
-        $explain = self::getenv('KIPRIOHTTPAPIS_TEST_EXPLAIN');
+        $explain = self::getenv('KIPRIO_HTTP_APIS_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['KIPRIOHTTPAPIS_TEST_EXPLAIN'] = $explain;
+            $m['KIPRIO_HTTP_APIS_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

@@ -26,7 +26,7 @@ class EmailValidateEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -74,39 +74,39 @@ def email_validate_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID"]
+  entid_env_raw = ENV["KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID" => idmap,
-    "KIPRIOHTTPAPIS_TEST_LIVE" => "FALSE",
-    "KIPRIOHTTPAPIS_TEST_EXPLAIN" => "FALSE",
-    "KIPRIOHTTPAPIS_APIKEY" => "NONE",
+    "KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID" => idmap,
+    "KIPRIO_HTTP_APIS_TEST_LIVE" => "FALSE",
+    "KIPRIO_HTTP_APIS_TEST_EXPLAIN" => "FALSE",
+    "KIPRIO_HTTP_APIS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID"])
+    env["KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["KIPRIOHTTPAPIS_TEST_LIVE"] == "TRUE"
+  if env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["KIPRIOHTTPAPIS_APIKEY"],
+        "apikey" => env["KIPRIO_HTTP_APIS_APIKEY"],
       },
       extra || {},
     ])
     client = KiprioHttpApisSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["KIPRIOHTTPAPIS_TEST_LIVE"] == "TRUE"
+  live = env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["KIPRIOHTTPAPIS_TEST_EXPLAIN"] == "TRUE",
+    explain: env["KIPRIO_HTTP_APIS_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

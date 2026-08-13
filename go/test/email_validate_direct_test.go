@@ -41,7 +41,8 @@ func TestEmailValidateDirect(t *testing.T) {
 		if setup.live {
 			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
 			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap.
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
 			if err != nil {
 				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -103,21 +104,21 @@ func email_validateDirectSetup(mockres any) *email_validateDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID": map[string]any{},
-		"KIPRIOHTTPAPIS_TEST_LIVE":    "FALSE",
-		"KIPRIOHTTPAPIS_APIKEY":       "NONE",
+		"KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID": map[string]any{},
+		"KIPRIO_HTTP_APIS_TEST_LIVE":    "FALSE",
+		"KIPRIO_HTTP_APIS_APIKEY":       "NONE",
 	})
 
-	live := env["KIPRIOHTTPAPIS_TEST_LIVE"] == "TRUE"
+	live := env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
-			"apikey": env["KIPRIOHTTPAPIS_APIKEY"],
+			"apikey": env["KIPRIO_HTTP_APIS_APIKEY"],
 		}
 		client := sdk.NewKiprioHttpApisSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["KIPRIOHTTPAPIS_TEST_EMAIL_VALIDATE_ENTID"]; ok {
+		if entidRaw, ok := env["KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

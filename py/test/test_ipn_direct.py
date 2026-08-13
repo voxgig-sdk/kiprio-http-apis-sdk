@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from kipriohttpapis_sdk.utility.voxgig_struct import voxgig_struct as vs
 from kipriohttpapis_sdk import KiprioHttpApisSDK
-from core import helpers
+from kipriohttpapis_sdk.core import helpers
 from test import runner
 
 
@@ -56,16 +56,16 @@ def _ipn_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "KIPRIOHTTPAPIS_TEST_IPN_ENTID": {},
-        "KIPRIOHTTPAPIS_TEST_LIVE": "FALSE",
-        "KIPRIOHTTPAPIS_APIKEY": "NONE",
+        "KIPRIO_HTTP_APIS_TEST_IPN_ENTID": {},
+        "KIPRIO_HTTP_APIS_TEST_LIVE": "FALSE",
+        "KIPRIO_HTTP_APIS_APIKEY": "NONE",
     })
 
-    live = env.get("KIPRIOHTTPAPIS_TEST_LIVE") == "TRUE"
+    live = env.get("KIPRIO_HTTP_APIS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("KIPRIOHTTPAPIS_APIKEY"),
+            "apikey": env.get("KIPRIO_HTTP_APIS_APIKEY"),
         }
         client = KiprioHttpApisSDK(merged_opts)
         return {

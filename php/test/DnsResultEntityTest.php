@@ -33,7 +33,7 @@ class DnsResultEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set KIPRIOHTTPAPIS_TEST_DNS_RESULT_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set KIPRIO_HTTP_APIS_TEST_DNS_RESULT_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -77,39 +77,39 @@ function dns_result_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("KIPRIOHTTPAPIS_TEST_DNS_RESULT_ENTID");
+    $entid_env_raw = getenv("KIPRIO_HTTP_APIS_TEST_DNS_RESULT_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "KIPRIOHTTPAPIS_TEST_DNS_RESULT_ENTID" => $idmap,
-        "KIPRIOHTTPAPIS_TEST_LIVE" => "FALSE",
-        "KIPRIOHTTPAPIS_TEST_EXPLAIN" => "FALSE",
-        "KIPRIOHTTPAPIS_APIKEY" => "NONE",
+        "KIPRIO_HTTP_APIS_TEST_DNS_RESULT_ENTID" => $idmap,
+        "KIPRIO_HTTP_APIS_TEST_LIVE" => "FALSE",
+        "KIPRIO_HTTP_APIS_TEST_EXPLAIN" => "FALSE",
+        "KIPRIO_HTTP_APIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["KIPRIOHTTPAPIS_TEST_DNS_RESULT_ENTID"]);
+        $env["KIPRIO_HTTP_APIS_TEST_DNS_RESULT_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["KIPRIOHTTPAPIS_TEST_LIVE"] === "TRUE") {
+    if ($env["KIPRIO_HTTP_APIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["KIPRIOHTTPAPIS_APIKEY"],
+                "apikey" => $env["KIPRIO_HTTP_APIS_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new KiprioHttpApisSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["KIPRIOHTTPAPIS_TEST_LIVE"] === "TRUE";
+    $live = $env["KIPRIO_HTTP_APIS_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["KIPRIOHTTPAPIS_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["KIPRIO_HTTP_APIS_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

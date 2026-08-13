@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ KiprioHttpApisUtility.registrar = ->(u) {
   u.prepare_params = KiprioHttpApisUtilities::PrepareParams
   u.prepare_path = KiprioHttpApisUtilities::PreparePath
   u.prepare_query = KiprioHttpApisUtilities::PrepareQuery
+  u.graphql_body = KiprioHttpApisUtilities::GraphqlBody
+  u.graphql_errors = KiprioHttpApisUtilities::GraphqlErrors
   u.result_basic = KiprioHttpApisUtilities::ResultBasic
   u.result_body = KiprioHttpApisUtilities::ResultBody
   u.result_headers = KiprioHttpApisUtilities::ResultHeaders

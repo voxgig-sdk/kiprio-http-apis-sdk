@@ -26,8 +26,8 @@ import {
 describe('EmailValidateEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when KIPRIOHTTPAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('KIPRIOHTTPAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when KIPRIO_HTTP_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('KIPRIO_HTTP_APIS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = KiprioHttpApisSDK.test()
@@ -62,7 +62,7 @@ describe('EmailValidateEntity', async () => {
     // LOAD
     const email_validate_ref01_ent = client.EmailValidate()
     const email_validate_ref01_match_dt0: any = {}
-    const email_validate_ref01_data_dt0 = await email_validate_ref01_ent.load(email_validate_ref01_match_dt0)
+    const email_validate_ref01_data_dt0 = (await email_validate_ref01_ent.load(email_validate_ref01_match_dt0)).data()
     assert(null != email_validate_ref01_data_dt0)
 
 
