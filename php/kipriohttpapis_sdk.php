@@ -40,7 +40,7 @@ class KiprioHttpApisSDK
         $utility = new KiprioHttpApisUtility();
         $this->_utility = $utility;
 
-        $config = KiprioHttpApisConfig::make_config();
+        $config = KiprioHttpApisConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

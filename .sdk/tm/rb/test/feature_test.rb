@@ -15,7 +15,7 @@ require_relative "../KiprioHttpApis_sdk"
 module KiprioHttpApisFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = KiprioHttpApisConfig.make_config["feature"]
+    f = KiprioHttpApisConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

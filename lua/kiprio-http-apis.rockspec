@@ -23,6 +23,7 @@ build = {
   modules = {
     ["kiprio-http-apis_sdk"] = "kiprio-http-apis_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }
