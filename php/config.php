@@ -33,6 +33,9 @@ class KiprioHttpApisConfig
         return [
             "main" => [
                 "name" => "KiprioHttpApis",
+                "slug" => "kiprio-http-apis",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -209,6 +212,7 @@ class KiprioHttpApisConfig
             ],
             [
               'name' => 'suggest',
+              'short' => 'Suggested correction for typos',
               'type' => '`$STRING`',
             ],
             [
@@ -464,6 +468,7 @@ class KiprioHttpApisConfig
             ],
             [
               'name' => 'language',
+              'short' => 'BCP 47 language tag',
               'type' => '`$STRING`',
             ],
             [
@@ -474,6 +479,7 @@ class KiprioHttpApisConfig
                   'type' => '`$STRING`',
                 ],
               ],
+              'short' => 'Text to check',
               'type' => '`$STRING`',
             ],
           ],
@@ -592,6 +598,7 @@ class KiprioHttpApisConfig
             ],
             [
               'name' => 'entities',
+              'short' => 'Include detected entity positions in response',
               'type' => '`$ARRAY`',
             ],
             [
@@ -600,6 +607,7 @@ class KiprioHttpApisConfig
             ],
             [
               'name' => 'redact',
+              'short' => 'Comma-separated PII types to redact.',
               'type' => '`$STRING`',
             ],
             [
@@ -609,6 +617,7 @@ class KiprioHttpApisConfig
             [
               'name' => 'text',
               'req' => true,
+              'short' => 'Text to redact',
               'type' => '`$STRING`',
             ],
           ],
