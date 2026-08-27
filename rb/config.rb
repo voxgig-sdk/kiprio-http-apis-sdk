@@ -28,6 +28,7 @@ module KiprioHttpApisConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
