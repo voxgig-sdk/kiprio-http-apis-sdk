@@ -106,14 +106,22 @@ func generateDirectSetup(mockres any) *generateDirectSetupResult {
 	env := envOverride(map[string]any{
 		"KIPRIO_HTTP_APIS_TEST_GENERATE_ENTID": map[string]any{},
 		"KIPRIO_HTTP_APIS_TEST_LIVE":    "FALSE",
-		"KIPRIO_HTTP_APIS_APIKEY":       "NONE",
+		"KIPRIO_HTTP_APIS_APIKEY":       "",
 	})
 
 	live := env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
 
 	if live {
-		mergedOpts := map[string]any{
+		// sdk-test-control.json's test.client.options seeds the live
+		// client; the generated fields below overwrite anything they name.
+		mergedOpts := map[string]any{}
+		for k, v := range liveClientOptions() {
+			mergedOpts[k] = v
+		}
+		for k, v := range map[string]any{
 			"apikey": env["KIPRIO_HTTP_APIS_APIKEY"],
+		} {
+			mergedOpts[k] = v
 		}
 		client := sdk.NewKiprioHttpApisSDK(mergedOpts)
 

@@ -67,15 +67,17 @@ def dns_result_direct_setup(mockres)
   env = Runner.env_override({
     "KIPRIO_HTTP_APIS_TEST_DNS_RESULT_ENTID" => {},
     "KIPRIO_HTTP_APIS_TEST_LIVE" => "FALSE",
-    "KIPRIO_HTTP_APIS_APIKEY" => "NONE",
+    "KIPRIO_HTTP_APIS_APIKEY" => "",
   })
 
   live = env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
 
   if live
-    merged_opts = {
+    # Merged so the generated fields win: sdk-test-control.json's
+    # test.client.options adds to the live client, it does not redirect it.
+    merged_opts = Runner.live_client_options.merge({
       "apikey" => env["KIPRIO_HTTP_APIS_APIKEY"],
-    }
+    })
     client = KiprioHttpApisSDK.new(merged_opts)
     return {
       client: client,

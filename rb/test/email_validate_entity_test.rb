@@ -81,7 +81,7 @@ def email_validate_basic_setup(extra)
     "KIPRIO_HTTP_APIS_TEST_EMAIL_VALIDATE_ENTID" => idmap,
     "KIPRIO_HTTP_APIS_TEST_LIVE" => "FALSE",
     "KIPRIO_HTTP_APIS_TEST_EXPLAIN" => "FALSE",
-    "KIPRIO_HTTP_APIS_APIKEY" => "NONE",
+    "KIPRIO_HTTP_APIS_APIKEY" => "",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -92,6 +92,9 @@ def email_validate_basic_setup(extra)
 
   if env["KIPRIO_HTTP_APIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
+      # FIRST, so the generated fields below win: sdk-test-control.json's
+      # test.client.options adds to the live client, it does not redirect it.
+      Runner.live_client_options,
       {
         "apikey" => env["KIPRIO_HTTP_APIS_APIKEY"],
       },

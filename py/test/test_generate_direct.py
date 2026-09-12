@@ -63,15 +63,18 @@ def _generate_direct_setup(mockres):
     env = runner.env_override({
         "KIPRIO_HTTP_APIS_TEST_GENERATE_ENTID": {},
         "KIPRIO_HTTP_APIS_TEST_LIVE": "FALSE",
-        "KIPRIO_HTTP_APIS_APIKEY": "NONE",
+        "KIPRIO_HTTP_APIS_APIKEY": "",
     })
 
     live = env.get("KIPRIO_HTTP_APIS_TEST_LIVE") == "TRUE"
 
     if live:
-        merged_opts = {
+        # sdk-test-control.json's test.client.options seeds the live
+        # client; the generated fields below overwrite anything they name.
+        merged_opts = dict(runner.live_client_options())
+        merged_opts.update({
             "apikey": env.get("KIPRIO_HTTP_APIS_APIKEY"),
-        }
+        })
         client = KiprioHttpApisSDK(merged_opts)
         return {
             "client": client,
