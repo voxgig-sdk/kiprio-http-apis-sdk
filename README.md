@@ -105,7 +105,7 @@ local result, err = client:Utility():load({ input = "example" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/kiprio-http-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kiprio-http-apis-sdk/releases) |
+| TypeScript | `@voxgig-sdk/kiprio-http-apis-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kiprio-http-apis-sdk/releases) |
 | Python | `voxgig-sdk-kiprio-http-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kiprio-http-apis-sdk/releases) |
 | PHP | `voxgig-sdk/kiprio-http-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/kiprio-http-apis-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/kiprio-http-apis-sdk/go` | `go get github.com/voxgig-sdk/kiprio-http-apis-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Utility():load({ input = "example" })
 ### TypeScript
 
 ```ts
-import { KiprioHttpApisSDK } from '@voxgig-sdk/kiprio-http-apis'
+import { KiprioHttpApisSDK } from '@voxgig-sdk/kiprio-http-apis-sdk'
 
 const client = new KiprioHttpApisSDK({
   apikey: process.env.KIPRIO_HTTP_APIS_APIKEY,
