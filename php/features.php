@@ -4,7 +4,10 @@ declare(strict_types=1);
 // KiprioHttpApis SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class KiprioHttpApisFeatures
@@ -14,8 +17,14 @@ class KiprioHttpApisFeatures
         switch ($name) {
             case "base":
                 return new KiprioHttpApisBaseFeature();
+            case "ratelimit":
+                return new KiprioHttpApisRatelimitFeature();
+            case "retry":
+                return new KiprioHttpApisRetryFeature();
             case "test":
                 return new KiprioHttpApisTestFeature();
+            case "timeout":
+                return new KiprioHttpApisTimeoutFeature();
             default:
                 return new KiprioHttpApisBaseFeature();
         }
@@ -31,7 +40,10 @@ class KiprioHttpApisFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;
