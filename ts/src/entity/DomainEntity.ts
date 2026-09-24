@@ -19,7 +19,6 @@ import type {
   DomainListMatch,
 } from '../KiprioHttpApisTypes'
 
-// TODO: needs Entity superclass
 class DomainEntity extends KiprioHttpApisEntityBase<Domain> {
 
   constructor(client: KiprioHttpApisSDK, entopts: any) {

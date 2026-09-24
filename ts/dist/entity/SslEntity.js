@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SslEntity = void 0;
 const KiprioHttpApisEntityBase_1 = require("../KiprioHttpApisEntityBase");
-// TODO: needs Entity superclass
 class SslEntity extends KiprioHttpApisEntityBase_1.KiprioHttpApisEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

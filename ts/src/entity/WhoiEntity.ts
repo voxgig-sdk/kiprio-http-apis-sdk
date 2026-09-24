@@ -19,7 +19,6 @@ import type {
   WhoiListMatch,
 } from '../KiprioHttpApisTypes'
 
-// TODO: needs Entity superclass
 class WhoiEntity extends KiprioHttpApisEntityBase<Whoi> {
 
   constructor(client: KiprioHttpApisSDK, entopts: any) {

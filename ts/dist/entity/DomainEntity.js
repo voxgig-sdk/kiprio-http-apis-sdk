@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomainEntity = void 0;
 const KiprioHttpApisEntityBase_1 = require("../KiprioHttpApisEntityBase");
-// TODO: needs Entity superclass
 class DomainEntity extends KiprioHttpApisEntityBase_1.KiprioHttpApisEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

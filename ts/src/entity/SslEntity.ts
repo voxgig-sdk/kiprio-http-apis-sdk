@@ -19,7 +19,6 @@ import type {
   SslListMatch,
 } from '../KiprioHttpApisTypes'
 
-// TODO: needs Entity superclass
 class SslEntity extends KiprioHttpApisEntityBase<Ssl> {
 
   constructor(client: KiprioHttpApisSDK, entopts: any) {
